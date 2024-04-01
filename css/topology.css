@@ -1,0 +1,40 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+  
+  .container {
+    position: relative;
+  }
+  
+  .point {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #3498db;
+    position: absolute;
+  }
+  
+  #pointA {
+    top: 50px;
+    left: 50px;
+  }
+  
+  #pointB {
+    top: 150px;
+    left: 250px;
+  }
+  
+  .line {
+    position: absolute;
+    background-color: #3498db;
+    height: 2px;
+    width: 0;
+    transition: width 1s;
+  }
+  

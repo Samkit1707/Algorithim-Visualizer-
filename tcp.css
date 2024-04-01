@@ -1,0 +1,41 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .network {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .device {
+    position: absolute;
+    text-align: center;
+  }
+  
+  #client {
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+  }
+  
+  #server {
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .connection {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    width: 0;
+    height: 4px;
+    stroke: #3498db;
+    stroke-dasharray: 8;
+    stroke-dashoffset: 8;
+    transition: width 1s;
+  }
+  

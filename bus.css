@@ -1,0 +1,88 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+  }
+  
+  .network {
+    position: relative;
+  }
+  
+  .bus {
+    width: 500px;
+    height: 200px;
+    border: 2px solid #000;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .router {
+    width: 50px;
+    height: 30px;
+    background-color: #28a745;
+    border: 2px solid #000;
+    position: absolute;
+    left: 50%;
+    top: 10px;
+    transform: translateX(-50%);
+  }
+  
+  .node {
+    width: 20px;
+    height: 20px;
+    background-color: #007bff;
+    border-radius: 50%;
+    position: absolute;
+  }
+  
+  #A {
+    top: 20px;
+    left: 20px;
+  }
+  
+  #B {
+    top: 20px;
+    right: 20px;
+  }
+  
+  #C {
+    bottom: 20px;
+    left: 20px;
+  }
+  
+  #D {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .line {
+    position: absolute;
+  }
+  
+  .lineAB, .lineBC, .lineCD, .lineDA, .lineAR, .lineBR, .lineCR, .lineDR {
+    border-bottom: 2px dotted #000;
+    height: 100%;
+  }
+  
+  .loading-dots {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: blue;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: moveDots 3s linear infinite;
+  }
+  
+  @keyframes moveDots {
+    0% {
+      left: -20px;
+    }
+    100% {
+      left: calc(100% + 20px);
+    }
+  }
+  
