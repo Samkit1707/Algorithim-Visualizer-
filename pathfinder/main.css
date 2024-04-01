@@ -1,0 +1,250 @@
+header {
+  font-size: large;
+  background-color: rgb(90, 120, 255) !important;
+}
+
+.mdl-card {
+  width: 45%;
+  height: min-content;
+  top: 50%;
+  margin-top: -10%;
+  left: 50%;
+  margin-left: -21.9%;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+  visibility: visible;
+}
+
+.mdl-card__title, .mdl-card__actions, .mdl-button {
+  text-align: center;
+}
+
+.mdl-layout-title {
+  font-size: xx-large;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  background-color: white;
+  border: 1px solid skyblue;
+  width: 25px;
+  height: 25px;
+}
+
+.noHighlight {
+  user-select: none;
+}
+
+[class="start"], .start.noHighlight {
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url('images/start.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: startGoalWallWeightNodeAnimation;
+  animation-duration: 350ms;
+}
+
+.start {
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url('images/start.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+[class="goal"], .goal.noHighlight {
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url('images/goal.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: startGoalWallWeightNodeAnimation;
+  animation-duration: 350ms;
+}
+
+.goal {
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url('images/goal.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.wall {
+  background-color: rgb(69, 90, 100);
+  border-style: none;
+  animation-name: startGoalWallWeightNodeAnimation;
+  animation-duration: 350ms;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+[class="weight"], .weight.noHighlight {
+  background-color: transparent;
+  background-image: url('images/weight.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation-name: startGoalWallWeightNodeAnimation;
+  animation-duration: 350ms;
+  animation-timing-function: linear;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+.weight {
+  background-color: transparent;
+  background-image: url('images/weight.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.weight.visited, .weight.instantShortestPath {
+  background-image: url('images/weight.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.unweighted {
+  text-decoration-line: line-through;
+  text-decoration-color: red;
+}
+
+.emphasize {
+  font-weight: bold;
+  text-decoration-line: overline;
+  text-decoration-line: underline;
+}
+
+@keyframes startGoalWallWeightNodeAnimation {
+  0% {
+    transform: scale(0.5);
+  }
+
+  25% {
+    transform: scale(0.75);
+  }
+
+  50% {
+    transform: scale(1);
+  }
+
+  75% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.visited {
+  border-radius: 100%;
+  animation-name: visitedNodeAnimation;
+  animation-duration: 750ms;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+
+@keyframes visitedNodeAnimation {
+  0% {
+    transform: scale(0.25);
+    background-color: #FD1D1D;
+    border-radius: 100%;
+  }
+
+  25% {
+    transform: scale(0.5);
+    background-color: crimson;
+    border-radius: 100%;
+  }
+
+  50% {
+    transform: scale(0.75);
+    background-color: #E1306C;
+    border-radius: 50%;
+  }
+
+  75% {
+    transform: scale(1.5);
+    background-color: #C13584;
+    border-radius: 25%;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: blueviolet;
+    border-radius: 0%;
+  }
+}
+
+.shortestPath {
+  border-style: none;
+  animation-name: shortestPathNodeAnimation;
+  animation-duration: 750ms;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0ms;
+  animation-direction: alternate;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes shortestPathNodeAnimation {
+  0% {
+    transform: scale(0.25);
+    background-color: lightcyan;
+  }
+
+  25% {
+    transform: scale(0.5);
+    background-color: aquamarine;
+  }
+
+  50% {
+    transform: scale(0.75);
+    background-color: turquoise;
+  }
+
+  75% {
+    transform: scale(1.5);
+    background-color: deepskyblue;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: cyan;
+  }
+}
+
+.instantVisited {
+  background-color: blueviolet;
+}
+
+.instantShortestPath {
+  border-style: none;
+  background-color: cyan;
+}
