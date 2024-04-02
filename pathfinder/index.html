@@ -2,13 +2,19 @@
 <html>
   <head>
     <title>Pathfinding Visualizer</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"
       type="text/css"
     />
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css"
+    />
     <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
     <link rel="stylesheet" href="./getmdl-select/getmdl-select.min.css" />
     <script defer src="./getmdl-select/getmdl-select.min.js"></script>
@@ -21,10 +27,11 @@
         <h2 class="mdl-card__title-text">Welcome</h2>
       </div>
       <div class="mdl-card__supporting-text">
-        Instructions: Click and drag on grid to draw walls/weights. Press W to toggle between
-        drawing walls and drawing weights. Click and drag start/goal to move them. Drawing
-        walls/weights or moving the start/goal after an algorithm has visualized will instantly show
-        the final result as you drag your mouse. Pick an algorithm and enjoy.
+        Instructions: Click and drag on grid to draw walls/weights. Press W to
+        toggle between drawing walls and drawing weights. Click and drag
+        start/goal to move them. Drawing walls/weights or moving the start/goal
+        after an algorithm has visualized will instantly show the final result
+        as you drag your mouse. Pick an algorithm and enjoy.
       </div>
       <div class="mdl-card__actions mdl-card--border">
         <a
@@ -35,18 +42,26 @@
         </a>
       </div>
     </div>
-    <div id="BFSCard" class="mdl-card mdl-shadow--6dp" style="visibility: hidden">
+    <div
+      id="BFSCard"
+      class="mdl-card mdl-shadow--6dp"
+      style="visibility: hidden"
+    >
       <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">Breadth-First Search (Unweighted)</h2>
       </div>
       <div class="mdl-card__supporting-text">
-        BFS was originally meant for traversing/searching a tree or graph data structure. It works
-        by checking whether any one of the origin's neighbors is the destination. If so, the
-        algorithm returns true. If not, then it asks one of its neighbors the same question to all
-        of the neighbor's neighbors. This cycle is repeated either iteratively or recursively. For
-        the purposes of this web tool, the algorithm was slightly modified to use what the algorithm
-        learns on its journey in order backtrack its way from the destination to the origin.
-        <a href="https://en.wikipedia.org/wiki/Breadth-first_search" target="_blank"
+        BFS was originally meant for traversing/searching a tree or graph data
+        structure. It works by checking whether any one of the origin's
+        neighbors is the destination. If so, the algorithm returns true. If not,
+        then it asks one of its neighbors the same question to all of the
+        neighbor's neighbors. This cycle is repeated either iteratively or
+        recursively. For the purposes of this web tool, the algorithm was
+        slightly modified to use what the algorithm learns on its journey in
+        order backtrack its way from the destination to the origin.
+        <a
+          href="https://en.wikipedia.org/wiki/Breadth-first_search"
+          target="_blank"
           >See Wikipedia page</a
         >
       </div>
@@ -59,27 +74,34 @@
         </a>
       </div>
     </div>
-    <div id="DSPFCard" class="mdl-card mdl-shadow--6dp" style="visibility: hidden">
+    <div
+      id="DSPFCard"
+      class="mdl-card mdl-shadow--6dp"
+      style="visibility: hidden"
+    >
       <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Dijkstra's Shortest Path First Algorithm (Weighted)</h2>
+        <h2 class="mdl-card__title-text">
+          Dijkstra's Shortest Path First Algorithm (Weighted)
+        </h2>
       </div>
       <div class="mdl-card__supporting-text">
-        DSPF is very similar to BFS in that it asks each of the origin's neighbors the question of
-        whether it's the destination or not, and repeats this iteratively or recursively. The
-        difference, however is that DSPF takes into account so-called "weights", otherwise known as
-        traffic or anything that would slow someone down on the way to their destination. It does
-        this by initializing each node, except the origin, to have a distance of infinity from the
-        origin. The algorithm also uses an array of nodes sorted by each of their distances from the
-        origin, which gets updated and sorted with every iteration. The algorithm checks the
-        neighbors of the node closest to the origin and updates their distances from the origin only
-        if the path to the current neighbor is closer than the array says. This distance is the
-        number of steps it takes to get to the node closest to the origin, added to the number of
-        steps it takes to get to its current neighbor. The second addend will be either 1 or the
-        weight of the weight indicated on the slider. As it turns out, DSPF, or at least a modified
-        version of it, is apparently used by Google Maps.
-        <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm" target="_blank"
-          >See Wikipedia page</a
-        >
+        DSPF is very similar to BFS in that it asks each of the origin's
+        neighbors the question of whether it's the destination or not, and
+        repeats this iteratively or recursively. The difference, however is that
+        DSPF takes into account so-called "weights", otherwise known as traffic
+        or anything that would slow someone down on the way to their
+        destination. It does this by initializing each node, except the origin,
+        to have a distance of infinity from the origin. The algorithm also uses
+        an array of nodes sorted by each of their distances from the origin,
+        which gets updated and sorted with every iteration. The algorithm checks
+        the neighbors of the node closest to the origin and updates their
+        distances from the origin only if the path to the current neighbor is
+        closer than the array says. This distance is the number of steps it
+        takes to get to the node closest to the origin, added to the number of
+        steps it takes to get to its current neighbor. The second addend will be
+        either 1 or the weight of the weight indicated on the slider. As it
+        turns out, DSPF, or at least a modified version of it, is apparently
+        used by Google Maps. >
       </div>
       <div class="mdl-card__actions mdl-card--border">
         <a
@@ -90,50 +112,29 @@
         </a>
       </div>
     </div>
-    <div id="ASTARCard" class="mdl-card mdl-shadow--6dp" style="visibility: hidden">
-      <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">A* (A-Star) Search Algorithm (Weighted)</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        A* is very similar to DSPF in that it keeps track of each node's distance from the origin.
-        The difference, however is that A* takes into account each node's distance from the goal as
-        well. Using both the distance from the origin and distance from the goal, of a particular
-        node, the algorithm can tell which path takes the least steps to get to the goal. Similar to
-        DSPF, A* uses an array of nodes sorted by the nodes' total distance (distance from origin +
-        distance from goal), which gets updated and sorted with every iteration. The algorithm
-        checks the neighbors of the node with the least total distance, and updates their distances
-        from the origin and total distance, only if the distance from the origin to the current
-        neighbor is closer than the array says. Hence, the pattern that shoots towards the goal.
-        Furthermore, thanks to this algorithm's heuristic, it is faster than DSPF.
-        <a href="https://en.wikipedia.org/wiki/A*_search_algorithm" target="_blank"
-          >See Wikipedia page</a
-        >
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <a
-          class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-          onclick="confirm(this.parentElement.parentElement)"
-        >
-          Ok
-        </a>
-      </div>
-    </div>
-    <div id="DFSMazeCard" class="mdl-card mdl-shadow--6dp" style="visibility: hidden">
+    <div
+      id="DFSMazeCard"
+      class="mdl-card mdl-shadow--6dp"
+      style="visibility: hidden"
+    >
       <div class="mdl-card__title">
         <h2 class="mdl-card__title-text">Depth-First Search Maze Generator</h2>
       </div>
       <div class="mdl-card__supporting-text">
-        DFS is an algorithm similar to BFS, except instead of checking all current neighbors in
-        order, it checks one neighbor and iteratively or recursively checks its neighbors until the
-        algorithm has checked as deep as possible on a single node, at which point the algorithm
-        backtracks to find another way to go. Hence "depth-first" as opposed to "breadth-first"
-        (where breadth is referring to the breadth of a node, which are all its neighbors). To
-        generate a maze using DFS however, there is a slight variation. It involves starting with a
-        random node (which in this case is the start node) and choosing a single neighbor at random
-        on every function call. Furthermore, it assumes that the grid is filled with walls.
-        Everytime the function is called and there is a valid (wall) node two nodes in a random
-        direction from the current node, then a path between the two nodes gets created, and DFS is
-        invoked on that node that is two nodes away.
+        DFS is an algorithm similar to BFS, except instead of checking all
+        current neighbors in order, it checks one neighbor and iteratively or
+        recursively checks its neighbors until the algorithm has checked as deep
+        as possible on a single node, at which point the algorithm backtracks to
+        find another way to go. Hence "depth-first" as opposed to
+        "breadth-first" (where breadth is referring to the breadth of a node,
+        which are all its neighbors). To generate a maze using DFS however,
+        there is a slight variation. It involves starting with a random node
+        (which in this case is the start node) and choosing a single neighbor at
+        random on every function call. Furthermore, it assumes that the grid is
+        filled with walls. Everytime the function is called and there is a valid
+        (wall) node two nodes in a random direction from the current node, then
+        a path between the two nodes gets created, and DFS is invoked on that
+        node that is two nodes away.
         <a
           href="https://en.wikipedia.org/wiki/Maze_generation_algorithm#Randomized_depth-first_search"
           target="_blank"
@@ -150,9 +151,6 @@
       </div>
     </div>
     <header class="mdl-layout__header">
-      <div>
-        <a href="https://github.com/RyuseiC/Pathfinding-Visualizer" target="_blank">About</a>
-      </div>
       <div class="mdl-layout__header-row">
         <span class="mdl-layout-title">Pathfinding Visualizer</span>
         <div class="mdl-layout-spacer"></div>
@@ -160,18 +158,34 @@
           class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height"
           style="width: 350px"
         >
-          <input id="selected" type="text" value="" class="mdl-textfield__input" readonly />
+          <input
+            id="selected"
+            type="text"
+            value=""
+            class="mdl-textfield__input"
+            readonly
+          />
           <input type="hidden" value="" name="algorithm" />
-          <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+          <i class="mdl-icon-toggle__label material-icons"
+            >keyboard_arrow_down</i
+          >
           <label for="algorithm" class="mdl-textfield__label">Algorithm</label>
-          <ul for="algorithm" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
-            <li class="mdl-menu__item" data-val="BFS">Breadth-First Search Algorithm</li>
-            <li class="mdl-menu__item" data-val="DSPF">Dijkstra's Shortest Path First Algorithm</li>
-            <li class="mdl-menu__item" data-val="ASTAR">A* (A-Star) Search Algorithm</li>
-            <li class="mdl-menu__item" data-val="">Depth-First Search Maze Generator</li>
+          <ul
+            for="algorithm"
+            class="mdl-menu mdl-menu--bottom-left mdl-js-menu"
+          >
+            <li class="mdl-menu__item" data-val="BFS">
+              Breadth-First Search Algorithm
+            </li>
+            <li class="mdl-menu__item" data-val="DSPF">
+              Dijkstra's Shortest Path First Algorithm
+            </li>
           </ul>
         </div>
-        <button id="info" class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
+        <button
+          id="info"
+          class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect"
+        >
           <i class="material-icons">info</i>
         </button>
         <div class="mdl-layout-spacer"></div>
@@ -271,7 +285,7 @@
     <table id="grid" class="noHighlight"></table>
     <script langauage="javascript">
       function showMessage(value) {
-        document.getElementById('weight').innerHTML = value;
+        document.getElementById("weight").innerHTML = value;
       }
     </script>
     <script src="main.js"></script>
