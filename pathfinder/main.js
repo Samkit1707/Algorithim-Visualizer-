@@ -1,8 +1,8 @@
-var grid = document.getElementById('grid');
+var grid = document.getElementById("grid");
 var totalRows = 20;
 var totalCols = 55;
 var gameState = {
-  algorithm: '',
+  algorithm: "",
   nodeObjects: {},
   startNodeObject: -1,
   goalNodeObject: -1,
@@ -14,7 +14,11 @@ var gameState = {
   selectedWalls: true,
   selectedWeights: false,
   weightOfWeight: 5,
-  movingStartOrGoalNodes: { isMoving: false, isMovingStartNode: false, isMovingGoalNode: false },
+  movingStartOrGoalNodes: {
+    isMoving: false,
+    isMovingStartNode: false,
+    isMovingGoalNode: false,
+  },
 };
 
 /**
@@ -38,17 +42,20 @@ function convertDOMToJS(grid, gameState) {
       let nodeClassList = nodes[j].classList;
       let nodeObject = getNodeObject(nodes[j], totalCols);
       Object.assign(nodeObject, {
-        start: nodeClassList.contains('start') ? true : false,
-        goal: nodeClassList.contains('goal') ? true : false,
-        wall: nodeClassList.contains('wall') ? true : false,
-        weight: nodeClassList.contains('weight') ? true : false,
+        start: nodeClassList.contains("start") ? true : false,
+        goal: nodeClassList.contains("goal") ? true : false,
+        wall: nodeClassList.contains("wall") ? true : false,
+        weight: nodeClassList.contains("weight") ? true : false,
         isVisited: false,
       });
-      if (nodeClassList.contains('start')) {
+      if (nodeClassList.contains("start")) {
         gameState.startNodeObject = nodeObject;
-      } else if (nodeClassList.contains('goal')) {
+      } else if (nodeClassList.contains("goal")) {
         gameState.goalNodeObject = nodeObject;
-      } else if (nodeClassList.contains('weight') && gameState.algorithm === 'BFS') {
+      } else if (
+        nodeClassList.contains("weight") &&
+        gameState.algorithm === "BFS"
+      ) {
         nodeObject.weight = false;
       }
     }
@@ -59,29 +66,32 @@ function convertDOMToJS(grid, gameState) {
 
 function convertJSToDOM(gameState, nodeObjectsInVistedOrder) {
   let totalDistance = 0;
-  console.log('nodeObjectsInVistedOrder :>> ', nodeObjectsInVistedOrder);
+  console.log("nodeObjectsInVistedOrder :>> ", nodeObjectsInVistedOrder);
 
   if (gameState.visualizingMaze) {
-    console.log('converting');
+    console.log("converting");
     let i = 0;
     for (coordinates in gameState.nodeObjects) {
       let node = getNode(gameState.nodeObjects[coordinates]);
-      if (!node.className.includes('start') && !node.className.includes('goal')) {
-        node.className = '';
+      if (
+        !node.className.includes("start") &&
+        !node.className.includes("goal")
+      ) {
+        node.className = "";
       }
-      let nodeObject = gameState.nodeObjects[coordinates]
-      console.log(nodeObjectsInVistedOrder.includes(nodeObject))
+      let nodeObject = gameState.nodeObjects[coordinates];
+      console.log(nodeObjectsInVistedOrder.includes(nodeObject));
       setTimeout(() => {
         if (
           !nodeObjectsInVistedOrder.includes(nodeObject) &&
-          !node.className.includes('start') &&
-          !node.className.includes('goal')
+          !node.className.includes("start") &&
+          !node.className.includes("goal")
         ) {
-          node.className = 'wall';
+          node.className = "wall";
         }
       }, 5 * i);
       i++;
-    };
+    }
 
     setTimeout(() => {
       gameState.hasVisualized = true;
@@ -98,15 +108,15 @@ function convertJSToDOM(gameState, nodeObjectsInVistedOrder) {
   else if (gameState.hasVisualized) {
     for (coordinates in gameState.nodeObjects) {
       getNode(gameState.nodeObjects[coordinates]).classList.remove(
-        'shortestPath',
-        'instantShortestPath',
-        'visited',
-        'instantVisited'
+        "shortestPath",
+        "instantShortestPath",
+        "visited",
+        "instantVisited"
       );
     }
 
     nodeObjectsInVistedOrder.forEach((visitedNodeObject) => {
-      getNode(visitedNodeObject).classList.add('instantVisited');
+      getNode(visitedNodeObject).classList.add("instantVisited");
     });
 
     let tempNodeObject = gameState.goalNodeObject;
@@ -120,15 +130,15 @@ function convertJSToDOM(gameState, nodeObjectsInVistedOrder) {
     nodeObjectsInShortestPathOrder.reverse();
 
     nodeObjectsInShortestPathOrder.forEach((shortestPathNodeObject) => {
-      getNode(shortestPathNodeObject).classList.remove('instantVisited');
-      getNode(shortestPathNodeObject).classList.add('instantShortestPath');
+      getNode(shortestPathNodeObject).classList.remove("instantVisited");
+      getNode(shortestPathNodeObject).classList.add("instantShortestPath");
     });
   }
   // If the main algorithm has returned a non-null array, visualize the algorithm.
   else if (gameState.hasComputed) {
     nodeObjectsInVistedOrder.forEach((visitedNodeObject, i) => {
       setTimeout(() => {
-        getNode(visitedNodeObject).classList.add('visited');
+        getNode(visitedNodeObject).classList.add("visited");
       }, 4 * i);
     });
 
@@ -145,9 +155,11 @@ function convertJSToDOM(gameState, nodeObjectsInVistedOrder) {
 
       nodeObjectsInShortestPathOrder.forEach((shortestPathNodeObject, i) => {
         setTimeout(() => {
-          totalDistance += shortestPathNodeObject.weight ? gameState.weightOfWeight : 1;
-          getNode(shortestPathNodeObject).classList.remove('visited');
-          getNode(shortestPathNodeObject).classList.add('shortestPath');
+          totalDistance += shortestPathNodeObject.weight
+            ? gameState.weightOfWeight
+            : 1;
+          getNode(shortestPathNodeObject).classList.remove("visited");
+          getNode(shortestPathNodeObject).classList.add("shortestPath");
         }, 30 * i);
       });
       setTimeout(() => {
@@ -156,7 +168,9 @@ function convertJSToDOM(gameState, nodeObjectsInVistedOrder) {
         gameState.isRunning = false;
         toggleButtons(gameState);
         setTimeout(() => {
-          alert(`It took ${totalDistance - 1} steps to get to your destination.`);
+          alert(
+            `It took ${totalDistance - 1} steps to get to your destination.`
+          );
         }, 20 * nodeObjectsInShortestPathOrder.length);
       }, 55 * nodeObjectsInShortestPathOrder.length);
     }, 5 * nodeObjectsInVistedOrder.length);
@@ -166,12 +180,14 @@ function convertJSToDOM(gameState, nodeObjectsInVistedOrder) {
 
 function visualize(gameState) {
   let algorithm = gameState.algorithm;
-  if (algorithm !== '') {
+  if (algorithm !== "") {
     // Remove weights if algorithm is BFS because it is an unweighted algorithm.
-    if (algorithm === 'BFS') {
+    if (algorithm === "BFS") {
       for (coordinates in gameState.nodeObjects) {
-        getNode(gameState.nodeObjects[coordinates]).classList.contains('weight')
-          ? getNode(gameState.nodeObjects[coordinates]).classList.remove('weight')
+        getNode(gameState.nodeObjects[coordinates]).classList.contains("weight")
+          ? getNode(gameState.nodeObjects[coordinates]).classList.remove(
+              "weight"
+            )
           : null;
       }
     }
@@ -180,15 +196,15 @@ function visualize(gameState) {
     gameState.hasComputed = false;
     for (coordinates in gameState.nodeObjects) {
       getNode(gameState.nodeObjects[coordinates]).classList.remove(
-        'visited',
-        'shortestPath',
-        'instantVisited',
-        'instantShortestPath'
+        "visited",
+        "shortestPath",
+        "instantVisited",
+        "instantShortestPath"
       );
     }
     visualizeAlgorithm(convertDOMToJS(grid, gameState));
   } else {
-    alert('Please select an algorithm');
+    alert("Please select an algorithm");
   }
 }
 
@@ -206,7 +222,7 @@ function getIndex(nodeObject) {
 }
 
 function getRowCol(node, totalCols) {
-  let nodeId = parseInt(node.id.split(' ')[1]);
+  let nodeId = parseInt(node.id.split(" ")[1]);
   return {
     row: Math.floor(nodeId / totalCols),
     col: nodeId % totalCols,
@@ -214,19 +230,23 @@ function getRowCol(node, totalCols) {
 }
 
 function drawGrid(totalRows, totalCols, gameState) {
-  let grid = document.getElementById('grid');
-  grid.innerHTML = '';
+  let grid = document.getElementById("grid");
+  grid.innerHTML = "";
   for (let r = 0; r < totalRows; r++) {
-    let row = document.createElement('tr');
+    let row = document.createElement("tr");
     grid.appendChild(row);
     for (let c = 0; c < totalCols; c++) {
-      let node = document.createElement('td');
-      node.innerHTML = '&nbsp';
+      let node = document.createElement("td");
+      node.innerHTML = "&nbsp";
       node.id = `node ${c + r * totalCols}`;
-      node.pointerEvents = 'none';
-      node.addEventListener('mousedown', (event) => nodeMouseDown(event, gameState));
-      node.addEventListener('mouseenter', (event) => nodeMouseEnter(event, gameState));
-      node.addEventListener('mouseup', () => nodeMouseUp(gameState));
+      node.pointerEvents = "none";
+      node.addEventListener("mousedown", (event) =>
+        nodeMouseDown(event, gameState)
+      );
+      node.addEventListener("mouseenter", (event) =>
+        nodeMouseEnter(event, gameState)
+      );
+      node.addEventListener("mouseup", () => nodeMouseUp(gameState));
       row.appendChild(node);
       gameState.nodeObjects[[r, c]] = {
         row: r,
@@ -238,10 +258,13 @@ function drawGrid(totalRows, totalCols, gameState) {
         isVisited: false,
       };
       if (c === Math.floor(totalCols / 5) && r === Math.floor(totalRows / 2)) {
-        node.className = 'start';
+        node.className = "start";
       }
-      if (c === totalCols - Math.floor(totalCols / 5) && r === Math.floor(totalRows / 2)) {
-        node.className = 'goal';
+      if (
+        c === totalCols - Math.floor(totalCols / 5) &&
+        r === Math.floor(totalRows / 2)
+      ) {
+        node.className = "goal";
       }
     }
   }
@@ -249,85 +272,101 @@ function drawGrid(totalRows, totalCols, gameState) {
 }
 
 // Event handlers for info button, dropdown menu, and slider
-document.addEventListener('keydown', (keyboardEvent) => nodeKeydown(keyboardEvent, gameState));
-document.getElementById('info').addEventListener('click', () => showInfo(gameState));
-document.getElementById('selected').addEventListener('change', () => changeAlgorithm(gameState));
-document.getElementById('weightSlider').addEventListener('change', () => changeWeight(gameState));
+document.addEventListener("keydown", (keyboardEvent) =>
+  nodeKeydown(keyboardEvent, gameState)
+);
+document
+  .getElementById("info")
+  .addEventListener("click", () => showInfo(gameState));
+document
+  .getElementById("selected")
+  .addEventListener("change", () => changeAlgorithm(gameState));
+document
+  .getElementById("weightSlider")
+  .addEventListener("change", () => changeWeight(gameState));
 // Event handlers for visualize, reset grid, clear walls and weights, and clear path buttons.
-document.getElementById('visualize').addEventListener('click', () => visualize(gameState));
 document
-  .getElementById('resetGrid')
-  .addEventListener('click', () => resetGrid(gameState, totalRows, totalCols));
+  .getElementById("visualize")
+  .addEventListener("click", () => visualize(gameState));
 document
-  .getElementById('clearWallsAndWeights')
-  .addEventListener('click', () => clearWallsAndWeights(gameState));
-document.getElementById('clearPath').addEventListener('click', () => clearPath(gameState));
+  .getElementById("resetGrid")
+  .addEventListener("click", () => resetGrid(gameState, totalRows, totalCols));
+document
+  .getElementById("clearWallsAndWeights")
+  .addEventListener("click", () => clearWallsAndWeights(gameState));
+document
+  .getElementById("clearPath")
+  .addEventListener("click", () => clearPath(gameState));
 
 function confirm(card) {
-  card.style.visibility = 'hidden';
+  card.style.visibility = "hidden";
 }
 
 function showInfo(gameState) {
   let card;
-  if (gameState.algorithm === '') {
-    card = document.getElementById('welcome');
-  } else if (gameState.algorithm === 'BFS') {
-    card = document.getElementById('BFSCard');
-  } else if (gameState.algorithm === 'DSPF') {
-    card = document.getElementById('DSPFCard');
-  } else if (gameState.algorithm === 'ASTAR') {
-    card = document.getElementById('ASTARCard');
-  } else if (gameState.algorithm === 'DFSMaze') {
-    card = document.getElementById('DFSMazeCard');
+  if (gameState.algorithm === "") {
+    card = document.getElementById("welcome");
+  } else if (gameState.algorithm === "BFS") {
+    card = document.getElementById("BFSCard");
+  } else if (gameState.algorithm === "DSPF") {
+    card = document.getElementById("DSPFCard");
+  } else if (gameState.algorithm === "AnSTAR") {
+    card = document.getElementById("ASTARCard");
+  } else if (gameState.algorithm === "DFSMaze") {
+    card = document.getElementById("DFSMazeCard");
   }
 
-  let cards = document.getElementsByClassName('mdl-card');
+  let cards = document.getElementsByClassName("mdl-card");
   for (let i = 0; i < cards.length; i++) {
     if (cards[i] !== card) {
-      cards[i].style.visibility = 'hidden';
+      cards[i].style.visibility = "hidden";
     }
   }
 
-  card.style.visibility = card.style.visibility === 'hidden' ? 'visible' : 'hidden';
+  card.style.visibility =
+    card.style.visibility === "hidden" ? "visible" : "hidden";
 }
 
 function changeAlgorithm(gameState) {
-  let algorithm = document.getElementById('selected').value;
+  let algorithm = document.getElementById("selected").value;
   // For BFS, an unweighted algorithm, handle legend for weight and wall nodes as soon as BFS is
   // selected. Also, make toggle weight drawing off and wall drawing on.
-  if (algorithm === 'Breadth-First Search Algorithm') {
-    gameState.algorithm = 'BFS';
+  if (algorithm === "Breadth-First Search Algorithm") {
+    gameState.algorithm = "BFS";
     gameState.selectedWalls = true;
     gameState.selectedWeights = false;
 
-    let weightLabel = document.getElementById('weightLabel');
-    weightLabel.classList.remove('emphasize');
-    weightLabel.classList.add('unweighted');
+    let weightLabel = document.getElementById("weightLabel");
+    weightLabel.classList.remove("emphasize");
+    weightLabel.classList.add("unweighted");
 
-    let wallLabel = document.getElementById('wallLabel');
-    wallLabel.classList.add('emphasize');
+    let wallLabel = document.getElementById("wallLabel");
+    wallLabel.classList.add("emphasize");
 
     convertDOMToJS(grid, gameState);
   } else if (algorithm === "Dijkstra's Shortest Path First Algorithm") {
-    gameState.algorithm = 'DSPF';
-    document.getElementById('weightLabel').classList.remove('unweighted');
-  } else if (algorithm === 'A* (A-Star) Search Algorithm') {
-    gameState.algorithm = 'ASTAR';
-    document.getElementById('weightLabel').classList.remove('unweighted');
-  } else if (algorithm === 'Depth-First Search Maze Generator') {
-    gameState.algorithm = 'DFSMaze';
+    gameState.algorithm = "DSPF";
+    document.getElementById("weightLabel").classList.remove("unweighted");
+  } else if (algorithm === "A* (A-Star) Search Algorithm") {
+    gameState.algorithm = "ASTAR";
+    document.getElementById("weightLabel").classList.remove("unweighted");
+  } else if (algorithm === "Depth-First Search Maze Generator") {
+    gameState.algorithm = "DFSMaze";
   }
 }
 
 function changeWeight(gameState) {
-  gameState.weightOfWeight = parseInt(document.getElementById('weightSlider').value, 10);
-  if (gameState.hasVisualized && gameState.algorithm !== 'BFS') {
+  gameState.weightOfWeight = parseInt(
+    document.getElementById("weightSlider").value,
+    10
+  );
+  if (gameState.hasVisualized && gameState.algorithm !== "BFS") {
     instantVisualizeAlgorithm(convertDOMToJS(grid, gameState));
   }
 }
 
 function resetGrid(gameState, totalRows, totalCols) {
-  document.getElementById('grid').innerHTML = '';
+  document.getElementById("grid").innerHTML = "";
   gameState.nodeObjects = {};
   gameState.hasVisualized = false;
   gameState.hasComputed = false;
@@ -336,7 +375,10 @@ function resetGrid(gameState, totalRows, totalCols) {
 
 function clearWallsAndWeights(gameState) {
   for (coordinates in gameState.nodeObjects) {
-    getNode(gameState.nodeObjects[coordinates]).classList.remove('wall', 'weight');
+    getNode(gameState.nodeObjects[coordinates]).classList.remove(
+      "wall",
+      "weight"
+    );
   }
 
   if (gameState.hasVisualized) {
@@ -347,10 +389,10 @@ function clearWallsAndWeights(gameState) {
 function clearPath(gameState) {
   for (coordinates in gameState.nodeObjects) {
     getNode(gameState.nodeObjects[coordinates]).classList.remove(
-      'shortestPath',
-      'instantShortestPath',
-      'visited',
-      'instantVisited'
+      "shortestPath",
+      "instantShortestPath",
+      "visited",
+      "instantVisited"
     );
   }
   convertDOMToJS(grid, gameState);
@@ -359,14 +401,18 @@ function clearPath(gameState) {
 
 // Disable buttons if an algorithm is runnning / being visualized.
 function toggleButtons(gameState) {
-  let grid = document.getElementById('grid');
-  let controls = document.getElementById('controls');
+  let grid = document.getElementById("grid");
+  let controls = document.getElementById("controls");
   if (gameState.isRunning) {
-    grid.style.pointerEvents = 'none';
-    Array.from(controls.children).forEach((control) => control.setAttribute('disabled', ''));
+    grid.style.pointerEvents = "none";
+    Array.from(controls.children).forEach((control) =>
+      control.setAttribute("disabled", "")
+    );
   } else {
-    grid.style.pointerEvents = 'initial';
-    Array.from(controls.children).forEach((control) => control.removeAttribute('disabled'));
+    grid.style.pointerEvents = "initial";
+    Array.from(controls.children).forEach((control) =>
+      control.removeAttribute("disabled")
+    );
   }
 }
 
@@ -374,9 +420,12 @@ function toggleButtons(gameState) {
 // Click and drag to draw.
 // Press W to toggle between drawing walls and drawing weights.
 function nodeMouseDown(event, gameState) {
-  if (event.target.classList.contains('start') || event.target.classList.contains('goal')) {
+  if (
+    event.target.classList.contains("start") ||
+    event.target.classList.contains("goal")
+  ) {
     gameState.movingStartOrGoalNodes.isMoving = true;
-    if (event.target.classList.contains('start')) {
+    if (event.target.classList.contains("start")) {
       Object.assign(gameState.movingStartOrGoalNodes, {
         isMovingStartNode: true,
         isMovingGoalNode: false,
@@ -411,29 +460,34 @@ function nodeMouseUp(gameState) {
 
 function nodeKeydown(keyboardEvent, gameState) {
   const { selectedWeights, selectedWalls } = gameState;
-  if (keyboardEvent.keyCode === 87 && gameState.algorithm !== 'BFS') {
+  if (keyboardEvent.keyCode === 87 && gameState.algorithm !== "BFS") {
     gameState.selectedWeights = selectedWeights ? false : true;
-    let weightLabel = document.getElementById('weightLabel');
+    let weightLabel = document.getElementById("weightLabel");
     gameState.selectedWeights
-      ? weightLabel.classList.add('emphasize')
-      : weightLabel.classList.remove('emphasize');
+      ? weightLabel.classList.add("emphasize")
+      : weightLabel.classList.remove("emphasize");
 
-    let wallLabel = document.getElementById('wallLabel');
+    let wallLabel = document.getElementById("wallLabel");
     gameState.selectedWalls = selectedWalls ? false : true;
     gameState.selectedWalls
-      ? wallLabel.classList.add('emphasize')
-      : wallLabel.classList.remove('emphasize');
+      ? wallLabel.classList.add("emphasize")
+      : wallLabel.classList.remove("emphasize");
   }
 }
 
 function handleWallsAndWeights(targetNode, gameState) {
   const { selectedWalls, selectedWeights, hasVisualized } = gameState;
   let targetNodeClassList = targetNode.classList;
-  if (!targetNodeClassList.contains('start') && !targetNodeClassList.contains('goal')) {
+  if (
+    !targetNodeClassList.contains("start") &&
+    !targetNodeClassList.contains("goal")
+  ) {
     if (selectedWalls) {
-      targetNode.className = targetNodeClassList.contains('wall') ? '' : 'wall';
-    } else if (selectedWeights && gameState.algorithm !== 'BFS') {
-      targetNode.className = targetNodeClassList.contains('weight') ? '' : 'weight';
+      targetNode.className = targetNodeClassList.contains("wall") ? "" : "wall";
+    } else if (selectedWeights && gameState.algorithm !== "BFS") {
+      targetNode.className = targetNodeClassList.contains("weight")
+        ? ""
+        : "weight";
     }
 
     convertDOMToJS(grid, gameState);
@@ -444,7 +498,12 @@ function handleWallsAndWeights(targetNode, gameState) {
 }
 
 function handleMovingStartAndGoal(targetNode, gameState) {
-  const { movingStartOrGoalNodes, startNodeObject, goalNodeObject, hasVisualized } = gameState;
+  const {
+    movingStartOrGoalNodes,
+    startNodeObject,
+    goalNodeObject,
+    hasVisualized,
+  } = gameState;
   let targetNodeClassList = targetNode.classList;
   // let obstacleClassNames = ['wall', 'weight'];
   // if (
@@ -452,20 +511,20 @@ function handleMovingStartAndGoal(targetNode, gameState) {
   // ) {
   if (
     movingStartOrGoalNodes.isMovingStartNode &&
-    !targetNodeClassList.contains('goal') &&
-    !targetNodeClassList.contains('wall') &&
-    !targetNodeClassList.contains('weight')
+    !targetNodeClassList.contains("goal") &&
+    !targetNodeClassList.contains("wall") &&
+    !targetNodeClassList.contains("weight")
   ) {
-    getNode(startNodeObject).className = '';
-    targetNode.className = 'start';
+    getNode(startNodeObject).className = "";
+    targetNode.className = "start";
   } else if (
     movingStartOrGoalNodes.isMovingGoalNode &&
-    !targetNodeClassList.contains('start') &&
-    !targetNodeClassList.contains('wall') &&
-    !targetNodeClassList.contains('weight')
+    !targetNodeClassList.contains("start") &&
+    !targetNodeClassList.contains("wall") &&
+    !targetNodeClassList.contains("weight")
   ) {
-    getNode(goalNodeObject).className = '';
-    targetNode.className = 'goal';
+    getNode(goalNodeObject).className = "";
+    targetNode.className = "goal";
   }
   // }
 
