@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCP/IP Layers</title>
+    <link rel="stylesheet" href="tcp.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">Home</a>
+        </nav>
+        <h1>TCP/IP</h1>
+        <h2>Networking Protocol</h2>
+    </header>
+    <main>
+        <section class="layer-container">
+            <img src="iso osi.gif" alt="TCP/IP Layers Diagram">
+            <div class="layer-descriptions">
+                <h2>The 7 Layers of the TCP/IP Model</h2>
+                <ul>
+                    <li>
+                        <h3>Layer 7: Application Layer</h3>
+                        <p>Provides services directly usable by applications like web browsing (HTTP), email (SMTP), file transfer (FTP), and video streaming.</p>
+                    </li>
+                    <li>
+                        <h3>Layer 6: Presentation Layer</h3>
+                        <p>Deals with data formatting and encryption/decryption. Ensures data is understood by both applications regardless of underlying systems.</p>
+                    </li>
+                    <li>
+                        <h3>Layer 5: Session Layer</h3>
+                        <p>Establishes, manages, and terminates sessions between applications. Examples include login sessions or file transfer connections.</p>
+                    </li>
+                    <li>
+                        <h3>Layer 4: Transport Layer</h3>
+                        <p>Provides reliable data transfer between applications. TCP (Transmission Control Protocol) ensures data arrives in order and without errors. UDP (User Datagram Protocol) prioritizes speed over reliability for applications like real-time video.</p>
+                    </li>
+                    <li>
+                        <h3>Layer 3: Network Layer</h3>
+                        <p>Handles logical addressing (IP addresses) and routing packets across networks. It determines the best path for data to reach its destination.</p>
+                    </li>
+                    <li>
+                        <h3>Layer 2: Data Link Layer</h3>
+                        <p>Controls how data is transmitted over physical media (cables, Wi-Fi) and handles error detection using techniques like checksums. It manages physical addressing (MAC addresses) of devices on the network.</p>
+                    </li>
+                    <li>
+                        <h3>Layer 1: Physical Layer</h3>
+                        <p>Defines the physical transmission of data bits over a communication channel. It specifies the electrical or optical signals used to represent data on the medium.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
