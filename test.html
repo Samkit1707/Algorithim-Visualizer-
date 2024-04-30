@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSI Model Network Security Cheat Sheet</title>
+    <link rel="stylesheet" href="test.css">
+</head>
+<body>
+    <h1>Top Network Security Cheatsheet</h1>
+    <div class="container">
+        <div class="layer">
+            <svg class="icon">
+                <use xlink:href="#physical"></use>
+            </svg>
+            <h2>1. Physical Layer</h2>
+            <p>The physical layer is the foundation, responsible for the physical transmission of data bits across a network medium. Common attacks include:</p>
+            <ul>
+                <li>Eavesdropping/Tapping</li>
+                <li>Physical tampering</li>
+                <li>Electromagnetic interference</li>
+            </ul>
+        </div>
+        <div class="layer">
+            <svg class="icon">
+                <use xlink:href="#datalink"></use>
+            </svg>
+            <h2>2. Data Link Layer</h2>
+            <p>The data link layer packages data into frames for transmission on the same network segment. Common attacks include:</p>
+            <ul>
+                <li>ARP spoofing</li>
+                <li>MAC address spoofing</li>
+                <li>Switch flooding</li>
+            </ul>
+        </div>
+        <div class="layer">
+            <svg class="icon">
+                <use xlink:href="#network"></use>
+            </svg>
+            <h2>3. Network Layer</h2>
+            <p>The network layer routes packets across networks, determining the best path for data to travel. Common attacks include:</p>
+            <ul>
+                <li>IP spoofing</li>
+                <li>Route table manipulation</li>
+                <li>Smurf attack</li>
+            </ul>
+        </div>
+        <div class="layer">
+            <svg class="icon">
+                <use xlink:href="#transport"></use>
+            </svg>
+            <h2>4. Transport Layer</h2>
+            <p>The transport layer provides reliable data transfer services between applications. Common attacks include:</p>
+            <ul>
+                <li>UDP flood</li>
+                <li>SYN flood</li>
+                <li>TCP Hijacking</li>
+            </ul>
+        </div>
+        <div class="layer">
+            <svg class="icon">
+                <use xlink:href="#session"></use>
+            </svg>
+            <h2>5. Session Layer</h2>
+            <p>The session layer establishes, manages, and terminates sessions between applications. Common attacks include:</p>
+            <ul>
+                <li>Session fixation attacks</li>
+                <li>Session replay attacks</li>
+            </ul>
+        </div>
+        <div class="layer">
+            <svg class="icon">
+                <use xlink:href="#presentation"></use>
+            </svg>
+            <h2>6. Presentation Layer</h2>
+            <p>The presentation layer formats and encrypts data for presentation to the application layer. Common attacks include:</p>
+            <ul>
+                <li>SSL Stripping</li>
+                <li>Character Encoding Attacks</li>
+            </ul>
+        </div>
+        <div class="layer">
+            <svg class="icon">
+                <svg class="icon">
+                    <use xlink:href="#application"></use>
+                </svg>
+            </svg>
+            <h2>7. Application Layer</h2>
+            <p>The application layer provides network services to applications. Common attacks include:</p>
+            <ul>
+                <li>SQL Injection</li>
+                <li>Cross-Site Scripting (XSS)</li>
+                <li>DDoS attacks</li>
+            </ul>
+        </div>
+    </div>
+    <svg style="display: none;"> <symbol id="physical">
+            <path d="M7 0l5 5-5 5z" />
+            <circle cx="6" cy="6" r="2" />
+            <line x1="1" y1="1" x2="11" y2="
