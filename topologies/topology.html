@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Topologies</title>
+    <link rel="stylesheet" href="topology.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">Home</a>
+        </nav>
+        <h1>Network Topologies</h1>
+    </header>
+    <main>
+        <h2>Network Topology Theory</h2>
+        <p>A network topology refers to the layout and structure of a network. It defines how devices are interconnected and how data flows between them. Different topologies offer advantages and disadvantages in terms of scalability, cost, reliability, and performance.</p>
+
+        <section class="topology">
+            <h2>Star Topology</h2>
+            <div class="theory-content">
+                <p>In a star topology, all devices are connected to a central hub or switch. This central device acts as a traffic controller, routing data packets between devices. It simplifies network management and troubleshooting as failures are isolated to individual devices or the central hub.</p>
+            </div>
+            <img src="star.gif" alt="Star Topology Diagram">
+        </section>
+
+        <section class="topology alternate">
+            <img src="ring.gif" alt="Ring Topology Diagram">
+            <div class="theory-content">
+                <h2>Ring Topology</h2>
+                <p>In a ring topology, devices are connected in a closed loop. Data travels in one direction around the ring, passing through each device. Each device acts as a repeater, regenerating the signal to maintain its strength over longer distances. A break in the ring can disrupt the entire network.</p>
+            </div>
+        </section>
+
+        <section class="topology">
+            <h2>Bus Topology</h2>
+            <div class="theory-content">
+                <p>In a bus topology, all devices are connected to a single shared cable called a bus. Data is broadcasted on the bus, and each device receives the signal and determines if it's intended for them. This topology is simple to set up but can experience performance issues due to collisions when multiple devices try to transmit simultaneously.</p>
+            </div>
+            <img src="bus.gif" alt="Bus Topology Diagram">
+        </section>
+
+        <section class="topology alternate">
+            <img src="mesh" alt="Mesh Topology Diagram">
+            <div class="theory-content">
+                <h2>Mesh Topology</h2>
+                <p>In a mesh topology, devices are interconnected with multiple pathways. This provides redundancy and fault tolerance, as data can be rerouted if a connection fails. Mesh topologies are often used in wireless networks and offer high reliability but can be complex to manage and more expensive to set up.</p>
+            </div>
+        </section>
+    </main>
+    <script src=""></script>
+</body>
+</html>
